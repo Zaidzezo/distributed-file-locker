@@ -103,6 +103,15 @@ cd client
 npm start
 ```
 
+## Verification & Testing
+
+To run code quality checks using Oxlint:
+
+```bash
+# Run oxlint across the project
+npx oxlint
+```
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
