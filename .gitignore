@@ -1,0 +1,41 @@
+# ==========================================
+# Dependencies & Build Outputs
+# ==========================================
+node_modules/
+dist/
+build/
+.pnpm-store/
+
+# ==========================================
+# Storage Node Fragment Folders (CRITICAL)
+# ==========================================
+# Ignores fragments, fragments-1, fragments-2, fragments-3, etc.
+**/fragments*
+storage-node/fragments*
+
+# ==========================================
+# Backend Temp Uploads & Dummy Test Files
+# ==========================================
+backend/temp_uploads/
+backend/test-files/
+backend/*.txt
+test_payload.txt
+
+# ==========================================
+# Database & Docker Persistent Data
+# ==========================================
+mongo_data/
+
+# ==========================================
+# Environment Variables & Secrets
+# ==========================================
+.env
+.env.local
+.env.*.local
+
+# ==========================================
+# OS & Editor Files
+# ==========================================
+.DS_Store
+.vscode/
+*.log

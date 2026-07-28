@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  # 🍃 Database Registry Node
+  mongodb:
+    image: mongo:latest
+    container_name: locker_crypto_registry
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db # 💾 Declared properly below to guarantee persistence
+
+  # 🧠 Central Application Brain
+  central_brain:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: locker_central_brain
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/locker
+      - PORT=5000
+      - JWT_SECRET=REMOVED_HISTORICAL_SECRET
+    depends_on:
+      - mongodb
+
+  # 📦 Storage Node 1
+  storage_node_1:
+    build:
+      context: ./storage-node
+      dockerfile: Dockerfile
+    container_name: storage-node-1
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NODE_URL=http://storage-node-1:3001
+    volumes:
+      - ./storage-node/fragments-1:/app/fragments
+
+  # 📦 Storage Node 2
+  storage_node_2:
+    build:
+      context: ./storage-node
+      dockerfile: Dockerfile
+    container_name: storage-node-2
+    ports:
+      - "3002:3001"
+    environment:
+      - PORT=3001
+      - NODE_URL=http://storage-node-2:3001
+    volumes:
+      - ./storage-node/fragments-2:/app/fragments
+
+  # 📦 Storage Node 3
+  storage_node_3:
+    build:
+      context: ./storage-node
+      dockerfile: Dockerfile
+    container_name: storage-node-3
+    ports:
+      - "3003:3001"
+    environment:
+      - PORT=3001
+      - NODE_URL=http://storage-node-3:3001
+    volumes:
+      - ./storage-node/fragments-3:/app/fragments
+
+# 🔑 FIX: Fully declare all infrastructure named storage structures
+volumes:
+  mongo_data:
