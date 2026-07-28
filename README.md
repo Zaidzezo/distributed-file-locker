@@ -21,6 +21,7 @@ The **Distributed File Locker** provides secure, scalable, and resilient file st
 - **Frontend**: React.js & tailwind
 - **Database**: MongoDB
 - **Containerization**: Docker & Docker Compose
+- - **Tooling & Linting**: [Oxlint](https://oxc.rs/) (Rust-based high-performance linting replacing ESLint)
 - **Security**: JWT Authentication, Tenant Isolation, Hash Verification (SHA-256)
 
 ---
