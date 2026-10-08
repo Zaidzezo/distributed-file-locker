@@ -7,7 +7,7 @@ import type { SharedFile } from "../types/cluster";
 
 const API_BASE = 'http://localhost:5000/api';
 
-const getAuthHeaders = () => {
+const getAuthHeaders = (): Record<string, string> => {
   try {
     const stored = localStorage.getItem('locker_session');
     if (stored) {
@@ -15,7 +15,7 @@ const getAuthHeaders = () => {
       if (parsed.user?.token) return { 'Authorization': parsed.user.token, 'Content-Type': 'application/json' };
     }
   } catch {}
-  return { 'Authorization': 'Bearer REMOVED_HISTORICAL_AUTH_BYPASS', 'Content-Type': 'application/json' };
+    return { 'Content-Type': 'application/json' };
 };
 
 interface FileRepositoryProps {

@@ -3,7 +3,7 @@ import type { ClusterNode, SharedFile, UploadQueueItem, LogEntry } from '../type
 
 const API_BASE = 'http://localhost:5000/api';
 
-const getAuthHeaders = () => {
+const getAuthHeaders = (): Record<string, string> => {
   try {
     const stored = localStorage.getItem('locker_session');
     if (stored) {
@@ -11,7 +11,7 @@ const getAuthHeaders = () => {
       if (parsed.user?.token) return { 'Authorization': parsed.user.token };
     }
   } catch {}
-  return { 'Authorization': 'Bearer REMOVED_HISTORICAL_AUTH_BYPASS' };
+  return { };
 };
 
 export function useClusterState() {

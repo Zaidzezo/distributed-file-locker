@@ -1,0 +1,9 @@
+@"
+node_modules
+dist
+.env
+.env.*
+.git
+temp_uploads
+test-files
+"@ | Set-Content .\backend\.dockerignore

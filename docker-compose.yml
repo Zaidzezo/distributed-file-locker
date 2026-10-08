@@ -5,11 +5,8 @@ services:
   mongodb:
     image: mongo:latest
     container_name: locker_crypto_registry
-    ports:
-      - "27017:27017"
     volumes:
-      - mongo_data:/data/db # 💾 Declared properly below to guarantee persistence
-
+      - mongo_data:/data/db
   # 🧠 Central Application Brain
   central_brain:
     build:
@@ -22,6 +19,7 @@ services:
       - MONGO_URI=${MONGO_URI}
       - PORT=${PORT}
       - JWT_SECRET=${JWT_SECRET}
+      - CLUSTER_SECRET=${CLUSTER_SECRET}
     depends_on:
       - mongodb
 

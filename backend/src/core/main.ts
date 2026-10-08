@@ -26,8 +26,8 @@ async function runSecureSystemTest() {
 
     console.log("\n👤 [PHASE 1: USER REGISTRATION / LOOKUP]");
     const targetUsername = "zaid_developer";
-    const targetPassword = "REMOVED_HISTORICAL_TEST_PASSWORD";
-
+    const targetPassword = "test-password";
+    
     let user = await findUserByUsername(db, targetUsername);
     if (!user) {
         console.log(`📝 User "${targetUsername}" not found. Provisioning fresh credentials...`);

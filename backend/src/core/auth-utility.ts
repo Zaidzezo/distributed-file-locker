@@ -2,7 +2,13 @@ import * as crypto from 'crypto';
 import type { User, SessionTokenPayload } from '../types/index.js';
 import { v4 as uuidv4 } from 'uuid';
 
-const CLUSTER_SECRET = "REMOVED_HISTORICAL_SECRET";
+const CLUSTER_SECRET: string = (() => {
+        const secret = process.env.CLUSTER_SECRET;
+        if (!secret) {
+                throw new Error("CLUSTER_SECRET environment variable is required");
+        }
+        return secret;
+})();
 
 export function hashPassword(password: string): { hash: string; salt: string } {
     const salt = crypto.randomBytes(16).toString('hex');
