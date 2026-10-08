@@ -1,15 +1,18 @@
 import { MongoClient, Db } from "mongodb";
 import type { FileMetadata, FragmentLocation, User } from "../types/index.js";
 
-const connectionString = "mongodb+srv://zaidalmomani4110_db_user:KvoeH2AYiJK8RXmR@cluster0.bkswtbl.mongodb.net/locker?appName=Cluster0";
+const connectionString = process.env.MONGO_URI;
 
+if (!connectionString) {
+  throw new Error("MONGO_URI is not configured");
+}
 let client: MongoClient | null = null;
 let db: Db | null = null;
 
 async function connectDB(): Promise<Db> {
   if (db) return db;
   
-  client = new MongoClient(connectionString);
+  client = new MongoClient(connectionString!);
   await client.connect();
   db = client.db("locker");
   return db;
